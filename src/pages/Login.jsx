@@ -18,6 +18,7 @@ const Login = ({setStatus}) => {
                 console.log(res)
                 if (res.data.Status==='Success'){
                     setStatus('authorized')
+                    window.location.href = '/home'
                 } else {
                     console.log('login failed')
                     document.getElementById('errorSlot').innerText = 'login failed'
@@ -30,16 +31,16 @@ const Login = ({setStatus}) => {
         )
     }
   return (
-    <div>
+    <div style={{textAlign:'center', display:'flex', flexDirection:'column', alignItems:'center', padding:'20px'}}>
         <h1>login</h1>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin} style={{display:'flex', flexDirection:'column', width:'200px', justifyContent:'center', padding:'20px'}}>
             <input type="text" name='username' placeholder='username' required/>
             <input type="password" name='password' placeholder='password' required/>
             <input type="submit" value="Log in"/>
         </form>
         <div id='errorSlot'></div>
-        <button onClick={signup}>Signup</button>
-        <button onClick={welcome}>Welcome page</button>
+        <button onClick={signup}>Don't have an account? Signup Here</button>
+        <button onClick={welcome}>Back to the Welcome page</button>
     </div>
   )
 }

@@ -34,16 +34,16 @@ const Signup = ({setStatus}) => {
       }
     }
   return (
-    <div>
+    <div style={{textAlign:'center', display:'flex', flexDirection:'column', alignItems:'center', padding:'20px'}}>
         <h1>Sign Up</h1>
-        <form onSubmit={handleSignup}>
+        <form onSubmit={handleSignup} style={{display:'flex', flexDirection:'column', width:'200px', justifyContent:'center', padding:'20px'}}>
             <input type="text" name='username' placeholder='username' required/>
             <input type="password" name='password' placeholder='password' required/>
             <input type="submit" value="Sign up"/>
         </form>
         <div id='errorSlot'></div>
-        <button onClick={login}>Login</button>
-        <button onClick={welcome}>Welcome page</button>
+        <button onClick={login}>Already have an account? Login Here</button>
+        <button onClick={welcome}>Back to the Welcome page</button>
     </div>
   )
 }

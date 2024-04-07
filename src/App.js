@@ -4,6 +4,8 @@ import { Outlet } from 'react-router-dom';
 import Welcome from './pages/Welcome';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import axios from 'axios'
+import Navbar from './components/Navbar';
 
 function App() {
   //use effect to check for what to start status as to check auth, works but with delay
@@ -12,16 +14,30 @@ function App() {
   //maybe initial state is used as a variable that checks for auth
   //you can make inital status 'loading' and then check for auth
   //can put everything in the outlet and thne auth check in here and that can redirtct 
-  const test = 'welcome'
-  const [status, setStatus] = useState(test);
-  // useEffect(()=>{
-  //   setStatus('authorized')
-  // }, [])
+  const [status, setStatus] = useState('loading');
+  axios.defaults.withCredentials = true
+  useEffect(()=>{
+    axios.get(process.env.REACT_APP_BACKEND_URL+'/verify').then(res=>{
+      if (res.data.Status==='Success'){
+        setStatus('authorized')
+      } else {
+        setStatus('welcome')
+      }
+    }).catch(err=>{
+      console.log(err)
+      setStatus('welcome')
+    })
+  }, [])
   return (
     <div>
-      <h1>hey</h1>
-      {status==='welcome'?<Welcome setStatus={setStatus}></Welcome>:status==='login'?<Login setStatus={setStatus}></Login>:status==='signup'?<Signup setStatus={setStatus}></Signup>:status==='authorized'?<Outlet></Outlet>:null}
-      <Outlet></Outlet>
+      <h1>Fantasy Surf App</h1>
+      {status==='loading'?<div>loading...</div>:status==='welcome'?<Welcome setStatus={setStatus}></Welcome>:status==='login'?<Login setStatus={setStatus}></Login>:status==='signup'?<Signup setStatus={setStatus}></Signup>:status==='authorized'?
+      <div>
+        <Navbar setStatus={setStatus}></Navbar>
+        <Outlet></Outlet>
+      </div>
+      :null}
+      {/* {status==='welcome'?<Welcome setStatus={setStatus}></Welcome>:status==='login'?<Login setStatus={setStatus}></Login>:status==='signup'?<Signup setStatus={setStatus}></Signup>:status==='authorized'?<Outlet></Outlet>:null} */}
     </div>
   );
 }
