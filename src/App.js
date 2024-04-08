@@ -18,6 +18,7 @@ function App() {
   axios.defaults.withCredentials = true
   useEffect(()=>{
     axios.get(process.env.REACT_APP_BACKEND_URL+'/verify').then(res=>{
+      //add admin check here, and add it to backend verify route
       if (res.data.Status==='Success'){
         setStatus('authorized')
       } else {
@@ -31,7 +32,7 @@ function App() {
   return (
     <div>
       <h1>Fantasy Surf App</h1>
-      {status==='loading'?<div>loading...</div>:status==='welcome'?<Welcome setStatus={setStatus}></Welcome>:status==='login'?<Login setStatus={setStatus}></Login>:status==='signup'?<Signup setStatus={setStatus}></Signup>:status==='authorized'?
+      {status==='admin'?<div>admin</div>:status==='loading'?<div>loading...</div>:status==='welcome'?<Welcome setStatus={setStatus}></Welcome>:status==='login'?<Login setStatus={setStatus}></Login>:status==='signup'?<Signup setStatus={setStatus}></Signup>:status==='authorized'?
       <div>
         <Navbar setStatus={setStatus}></Navbar>
         <Outlet></Outlet>

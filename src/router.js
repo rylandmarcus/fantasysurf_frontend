@@ -3,12 +3,16 @@ import App from "./App"
 import Logintest from "./pages/Logintest"
 import Homepagetest from "./pages/Homepagetest"
 import { userLoad } from "./loader"
+import Pageone from "./pages/Pageone"
+import Pagetwo from "./pages/Pagetwo"
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<App></App>}>
             <Route path="" element={<Logintest></Logintest>}></Route>
             <Route path="/home" element={<Homepagetest></Homepagetest>} loader={userLoad}></Route>
+            <Route path="pageone" element={<Pageone></Pageone>} loader={userLoad}></Route>
+            <Route path="pagetwo" element={<Pagetwo></Pagetwo>} loader={userLoad}></Route>
         </Route>
     )
 )

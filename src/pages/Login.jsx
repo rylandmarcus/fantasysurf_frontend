@@ -16,7 +16,11 @@ const Login = ({setStatus}) => {
         axios.post(process.env.REACT_APP_BACKEND_URL+'/auth/login', {username:username, password:password}).then(
             res=>{
                 console.log(res)
-                if (res.data.Status==='Success'){
+                if (res.data.Status==='Success'&&res.data.admin){
+                    setStatus('admin')
+                    // window.location.href = '/home'
+                    //decide what page to direct to
+                } else if (res.data.Status==='Success'){
                     setStatus('authorized')
                     window.location.href = '/home'
                 } else {

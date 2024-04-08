@@ -9,10 +9,12 @@ export const userLoad = ()=>{
             const data = res.data
             return data
         } else {
-            window.location.href = '/'
+            // window.location.href = '/'
+            return {}
         }
     }).catch(err=>{
         console.log(err)
-        window.location.href = '/'
+        // window.location.href = '/'
+        return {}
     })
 }
