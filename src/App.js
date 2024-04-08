@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import axios from 'axios'
 import Navbar from './components/Navbar';
+import Admin from './pages/Admin';
 
 function App() {
   //use effect to check for what to start status as to check auth, works but with delay
@@ -18,8 +19,11 @@ function App() {
   axios.defaults.withCredentials = true
   useEffect(()=>{
     axios.get(process.env.REACT_APP_BACKEND_URL+'/verify').then(res=>{
-      //add admin check here, and add it to backend verify route
-      if (res.data.Status==='Success'){
+      if (res.data.Status==='Success'&&res.data.admin){
+        console.log('admin')
+        // setStatus('admin')
+        setStatus('authorized')
+      } else if (res.data.Status==='Success'){
         setStatus('authorized')
       } else {
         setStatus('welcome')
@@ -32,13 +36,12 @@ function App() {
   return (
     <div>
       <h1>Fantasy Surf App</h1>
-      {status==='admin'?<div>admin</div>:status==='loading'?<div>loading...</div>:status==='welcome'?<Welcome setStatus={setStatus}></Welcome>:status==='login'?<Login setStatus={setStatus}></Login>:status==='signup'?<Signup setStatus={setStatus}></Signup>:status==='authorized'?
+      {status==='admin'?<Admin setStatus={setStatus}></Admin>:status==='loading'?<div>loading...</div>:status==='welcome'?<Welcome setStatus={setStatus}></Welcome>:status==='login'?<Login setStatus={setStatus}></Login>:status==='signup'?<Signup setStatus={setStatus}></Signup>:status==='authorized'?
       <div>
         <Navbar setStatus={setStatus}></Navbar>
         <Outlet></Outlet>
       </div>
       :null}
-      {/* {status==='welcome'?<Welcome setStatus={setStatus}></Welcome>:status==='login'?<Login setStatus={setStatus}></Login>:status==='signup'?<Signup setStatus={setStatus}></Signup>:status==='authorized'?<Outlet></Outlet>:null} */}
     </div>
   );
 }

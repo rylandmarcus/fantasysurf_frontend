@@ -17,7 +17,8 @@ const Login = ({setStatus}) => {
             res=>{
                 console.log(res)
                 if (res.data.Status==='Success'&&res.data.admin){
-                    setStatus('admin')
+                    setStatus('authorized')
+                    window.location.href = '/admin'
                     // window.location.href = '/home'
                     //decide what page to direct to
                 } else if (res.data.Status==='Success'){

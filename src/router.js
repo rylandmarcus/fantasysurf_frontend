@@ -2,9 +2,12 @@ import {createBrowserRouter, createRoutesFromElements, Route} from "react-router
 import App from "./App"
 import Logintest from "./pages/Logintest"
 import Homepagetest from "./pages/Homepagetest"
-import { userLoad } from "./loader"
+import { adminEventsLoad, adminLoad, adminSurfersLoad, userLoad } from "./loader"
 import Pageone from "./pages/Pageone"
 import Pagetwo from "./pages/Pagetwo"
+import Admin from "./pages/Admin"
+import Surfers from "./adminpages/Surfers"
+import Events from "./adminpages/Events"
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -13,6 +16,9 @@ const router = createBrowserRouter(
             <Route path="/home" element={<Homepagetest></Homepagetest>} loader={userLoad}></Route>
             <Route path="pageone" element={<Pageone></Pageone>} loader={userLoad}></Route>
             <Route path="pagetwo" element={<Pagetwo></Pagetwo>} loader={userLoad}></Route>
+            <Route path="admin" element={<Admin></Admin>} loader={adminLoad}></Route>
+            <Route path="admin/surfers" element={<Surfers></Surfers>} loader={adminSurfersLoad}></Route>
+            <Route path="admin/events" element={<Events></Events>} loader={adminEventsLoad}></Route>
         </Route>
     )
 )
