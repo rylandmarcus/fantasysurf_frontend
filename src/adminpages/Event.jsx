@@ -61,7 +61,7 @@ const Event = () => {
         <button onClick={offlineSetScores}>Offline set scores</button>
         <div>
             {bracket.map((s, i)=>{
-              return  s===null?null: <div key={event.surfers[s]._id+'bracket'+i}>
+              return  s===null?<div key={'tbddiv'+i}>TBD</div>: <div key={event.surfers[s]._id+'bracket'+i}>
                   <h4>
                   {i===eventLength-1?'champion':i===eventLength-3?'Finals':i===eventLength-7?'Semi-Finals':i===eventLength-15?'Quarter-Finals':i===eventLength-31?'Round of 16':i===eventLength-63?'Round of 32':null}
                  </h4> 

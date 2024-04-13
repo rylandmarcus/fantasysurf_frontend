@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import Welcomeheader from '../components/Welcomeheader'
 
 const Login = ({setStatus}) => {
     axios.defaults.withCredentials = true
@@ -19,11 +20,11 @@ const Login = ({setStatus}) => {
                 if (res.data.Status==='Success'&&res.data.admin){
                     setStatus('authorized')
                     window.location.href = '/admin'
-                    // window.location.href = '/home'
+                    // window.location.href = '/'
                     //decide what page to direct to
                 } else if (res.data.Status==='Success'){
                     setStatus('authorized')
-                    window.location.href = '/home'
+                    window.location.href = '/'
                 } else {
                     console.log('login failed')
                     document.getElementById('errorSlot').innerText = 'login failed'
@@ -37,6 +38,7 @@ const Login = ({setStatus}) => {
     }
   return (
     <div style={{textAlign:'center', display:'flex', flexDirection:'column', alignItems:'center', padding:'20px'}}>
+        <Welcomeheader></Welcomeheader>
         <h1>login</h1>
         <form onSubmit={handleLogin} style={{display:'flex', flexDirection:'column', width:'200px', justifyContent:'center', padding:'20px'}}>
             <input type="text" name='username' placeholder='username' required/>

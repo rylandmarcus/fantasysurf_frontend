@@ -7,6 +7,7 @@ import Signup from './pages/Signup';
 import axios from 'axios'
 import Navbar from './components/Navbar';
 import Admin from './pages/Admin';
+import Header from './components/Header';
 
 function App() {
   //use effect to check for what to start status as to check auth, works but with delay
@@ -38,6 +39,7 @@ function App() {
       <h1>Fantasy Surf App</h1>
       {status==='admin'?<Admin setStatus={setStatus}></Admin>:status==='loading'?<div>loading...</div>:status==='welcome'?<Welcome setStatus={setStatus}></Welcome>:status==='login'?<Login setStatus={setStatus}></Login>:status==='signup'?<Signup setStatus={setStatus}></Signup>:status==='authorized'?
       <div>
+        <Header></Header>
         <Navbar setStatus={setStatus}></Navbar>
         <Outlet></Outlet>
       </div>

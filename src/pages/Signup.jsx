@@ -1,4 +1,5 @@
 import React from 'react'
+import Welcomeheader from '../components/Welcomeheader'
 
 const Signup = ({setStatus}) => {
     const welcome = () => {
@@ -35,6 +36,7 @@ const Signup = ({setStatus}) => {
     }
   return (
     <div style={{textAlign:'center', display:'flex', flexDirection:'column', alignItems:'center', padding:'20px'}}>
+      <Welcomeheader></Welcomeheader>
         <h1>Sign Up</h1>
         <form onSubmit={handleSignup} style={{display:'flex', flexDirection:'column', width:'200px', justifyContent:'center', padding:'20px'}}>
             <input type="text" name='username' placeholder='username' required/>
