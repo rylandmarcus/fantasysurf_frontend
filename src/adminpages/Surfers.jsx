@@ -36,7 +36,13 @@ const Surfers = () => {
       setRankToAdd('')
       setImageToAdd('')
     }
-
+    const handleFixRank = (e)=>{
+      e.preventDefault()
+      const newRank = e.target.newRank.value
+      const _id = e.target._id.value
+      axios.put(process.env.REACT_APP_BACKEND_URL+'/admin/rankchange/'+_id, {rank:newRank})
+      e.target.previousSibling.previousSibling.innerText = newRank
+    }
   return (
     <div>
         <h1>Surfers</h1>
@@ -93,6 +99,12 @@ const Surfers = () => {
                 <h3>{surfer.name}</h3>
                 <p style={{display:'flex', flexDirection:'row', alignItems:"center", border:'1px solid black', borderRadius:'15px', padding:'5px'}}><span style={{margin:'5px'}}><img src={surfer.flag} alt={surfer.country} style={{width:'30px', height:'30px', border:'1px solid black', borderRadius:'50%'}}/></span>{surfer.country}</p>
                 <p>{surfer.rank}</p>
+                <Link to={'/admin/surfers/'+surfer._id}>Edit</Link>
+                <form onSubmit={handleFixRank}>
+                  <input type="number" name='newRank' placeholder={surfer.rank} defaultValue={surfer.rank}/>
+                  <input name="_id" defaultValue={surfer._id} hidden/>
+                  <input type="submit" value="Fix Rank"/>
+                </form>
               </div>
             )
           })}

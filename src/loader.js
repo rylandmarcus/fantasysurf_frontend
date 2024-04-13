@@ -90,3 +90,21 @@ export const adminEventLoad = ({params})=>{
         return {}
     })
 }
+
+export const adminSurferLoad = ({params})=>{
+    return axios.get(process.env.REACT_APP_BACKEND_URL+'/admin/surfers/'+params.id).then(res=>{
+        if (res.data){
+            console.log(res.data)
+            console.log('from loader')
+            const data = res.data
+            return data
+        } else {
+            window.location.href = '/home'
+            return {}
+        }
+    }).catch(err=>{
+        console.log(err)
+        window.location.href = '/home'
+        return {}
+    })
+}
