@@ -13,12 +13,14 @@ import Ctevents from "./pages/Ctevents"
 import Ctrankings from "./pages/Ctrankings"
 import Pastleagues from "./pages/Pastleagues"
 import Settings from "./pages/Settings"
+import Newleague from "./pages/Newleague"
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<App></App>}>
             <Route path="" element={<Home></Home>}></Route>
             <Route path="/leagues" element={<Leagues></Leagues>}></Route>
+            <Route path="/newleague" element={<Newleague></Newleague>}></Route>
             <Route path="/ctevents" element={<Ctevents></Ctevents>} loader={ctEventsLoad}></Route>
             <Route path="/ctrankings" element={<Ctrankings></Ctrankings>} loader={ctRankingsLoad}></Route>
             <Route path="/pastleagues" element={<Pastleagues></Pastleagues>}></Route>
