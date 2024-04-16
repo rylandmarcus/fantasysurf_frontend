@@ -1,6 +1,6 @@
 import {createBrowserRouter, createRoutesFromElements, Route} from "react-router-dom"
 import App from "./App"
-import { adminEventLoad, adminEventsLoad, adminLoad, adminSurferLoad, adminSurfersLoad, ctEventsLoad, userLoad } from "./loader"
+import { adminEventLoad, adminEventsLoad, adminLoad, adminSurferLoad, adminSurfersLoad, ctEventsLoad, ctRankingsLoad, userLoad } from "./loader"
 import Admin from "./pages/Admin"
 import Surfers from "./adminpages/Surfers"
 import Events from "./adminpages/Events"
@@ -20,7 +20,7 @@ const router = createBrowserRouter(
             <Route path="" element={<Home></Home>}></Route>
             <Route path="/leagues" element={<Leagues></Leagues>}></Route>
             <Route path="/ctevents" element={<Ctevents></Ctevents>} loader={ctEventsLoad}></Route>
-            <Route path="/ctrankings" element={<Ctrankings></Ctrankings>}></Route>
+            <Route path="/ctrankings" element={<Ctrankings></Ctrankings>} loader={ctRankingsLoad}></Route>
             <Route path="/pastleagues" element={<Pastleagues></Pastleagues>}></Route>
             <Route path="/settings" element={<Settings></Settings>}></Route>
             <Route path="admin" element={<Admin></Admin>} loader={adminLoad}></Route>

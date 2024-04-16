@@ -126,3 +126,21 @@ export const ctEventsLoad = ()=>{
         return {}
     })
 }
+
+export const ctRankingsLoad = ()=>{
+    return axios.get(process.env.REACT_APP_BACKEND_URL+'/ct/rankings').then(res=>{
+        if (res.data){
+            console.log(res.data)
+            console.log('from loader')
+            const data = res.data
+            return data
+        } else {
+            window.location.href = '/'
+            return {}
+        }
+    }).catch(err=>{
+        console.log(err)
+        window.location.href = '/'
+        return {}
+    })
+}

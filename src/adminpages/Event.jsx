@@ -33,13 +33,13 @@ const Event = () => {
   
     const updateScores = (e)=>{
         e.preventDefault()
-        const newScores = e.target.scores.value.split(',').map((s)=>parseInt(s))
+        const newScores = e.target.scores.value.split(',').map((s)=>parseFloat(s))
         axios.put(process.env.REACT_APP_BACKEND_URL+'/admin/updatescores/'+event._id, {scores:newScores})
         setScores(newScores)
     }
     const offlineSetScores = (e)=>{
         e.preventDefault()
-        const newScores = document.querySelector('input[name="scores"]').value.split(',').map((s)=>parseInt(s))
+        const newScores = document.querySelector('input[name="scores"]').value.split(',').map((s)=>parseFloat(s))
         setScores(newScores)
     }
   return (

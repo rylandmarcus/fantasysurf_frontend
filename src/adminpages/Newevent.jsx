@@ -54,9 +54,9 @@ const Newevent = () => {
         </form>
         <div>
             <p>Selected({selectedSurfers.length}):</p>
-            <div>
+            <div style={{display:'flex', flexDirection:'row'}}>
                 {selectedSurfers.map((surfer)=>{
-                    return <div key={surfer._id}>
+                    return <div key={surfer._id} style={{display:'flex', flexDirection:'row'}}>
                         <p>{surfer.name}</p>
                         <button onClick={unselect}>X</button>
                     </div>
@@ -71,7 +71,8 @@ const Newevent = () => {
             }}/>
             <div>
                 {shownUnselected.map((surfer)=>{
-                    return <div key={surfer._id}>
+                    return <div key={surfer._id} style={{display:'flex', flexDirection:'row'}}>
+                        <p>{surfer.name}</p>
                         <input type="checkbox" onChange={(e)=>{
                             if(e.target.checked){
                                 setSelectedSurfers([...selectedSurfers, surfer])
@@ -82,7 +83,6 @@ const Newevent = () => {
                                 setUnselectedSurfers([...unselectedSurfers, surfer])
                             }
                         }}/>
-                        <p>{surfer.name}</p>
                     </div>
                 })}
             </div>

@@ -8,6 +8,12 @@ const Ctevents = () => {
   const [openEvent, setOpenEvent] = useState(events[events.length-1] || {})
   const handleOpenEvent = (e) =>{
     const event = events.filter(event => event.eventNumber == e.target.innerText)
+    setRound32([])
+    setRound16([])
+    setQuarters([])
+    setSemis([])
+    setFinals([])
+    setWinner({})
     setOpenEvent(event[0])
     console.log(event)
     console.log(e.target.innerText)
@@ -120,68 +126,170 @@ const Ctevents = () => {
           )
         })}
       </nav>
-      <div>
+      <div >
         {openEvent.name?
-        <div>
-          <h2>Stop #{openEvent.eventNumber}: {openEvent.name} {openEvent.location} {openEvent.date}<span><img style={{width:'30px', height:'20px'}} src={openEvent.flag} alt={openEvent.location} /></span><span><img src={openEvent.image} alt={openEvent.name} style={{width:'100px', height:'70px'}}/></span></h2>
+        <h2>Stop #{openEvent.eventNumber}: {openEvent.name} {openEvent.location} {openEvent.date}<span><img style={{width:'30px', height:'20px'}} src={openEvent.flag} alt={openEvent.location} /></span><span><img src={openEvent.image} alt={openEvent.name} style={{width:'100px', height:'70px'}}/></span></h2>
+        :null}
+        {openEvent.name?
+        <div style={{display:'flex', flexDirection:'row'}}>
           {round32.length>0?
           <div>
             <h3>Round of 32</h3>
+            <div className='roundDiv'>
             {round32.map((heat, i)=>{
               return (
-                <div key={i+'round32'}>
-                  <p>{openEvent.surfers[heat[0]].name}: {heat[2]}pts vs {openEvent.surfers[heat[1]].name}: {heat[3]}pts</p>
+                <div key={i+'round32'} className='heatDiv'>
+                  <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                  <div className='surferInHeatDiv'>
+                    <img style={{width:'60px', height:'60px', border:'1px solid black', borderRadius:'50%'}} src={openEvent.surfers[heat[0]].image} alt={openEvent.surfers[heat[0]].name} />
+                    <div style={{fontSize:'25px'}}>{openEvent.surfers[heat[0]].name}</div>
+                    <div style={{color:'gray'}}>{openEvent.surfers[heat[0]].rank===0?'WC':openEvent.surfers[heat[0]].rank}</div>
+                    <img style={{width:'30px', height:'20px', border:'1px solid black'}} src={openEvent.surfers[heat[0]].flag} alt={openEvent.surfers[heat[0]].country} />
+                  </div>
+                  {typeof heat[2]==='number'?<div style={{fontSize:'25px', fontWeight:'bold', paddingRight:'10px'}}> {heat[2].toFixed(2)}pts</div>:<div>TBD</div>}
+                  </div>
+                  <div style={{textAlign:'center', fontWeight:'bold'}}>---VS---</div>
+                  <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                  <div className='surferInHeatDiv'>
+                    <img style={{width:'60px', height:'60px', border:'1px solid black', borderRadius:'50%'}} src={openEvent.surfers[heat[1]].image} alt={openEvent.surfers[heat[1]].name} />
+                    <div style={{fontSize:'25px'}}>{openEvent.surfers[heat[1]].name}</div>
+                    <div style={{color:'gray'}}>{openEvent.surfers[heat[1]].rank===0?'WC':openEvent.surfers[heat[1]].rank}</div>
+                    <img style={{width:'30px', height:'20px', border:'1px solid black'}} src={openEvent.surfers[heat[1]].flag} alt={openEvent.surfers[heat[1]].country} />
+                  </div>
+                  {typeof heat[3]==='number'?<div style={{fontSize:'25px', fontWeight:'bold', paddingRight:'10px'}}> {heat[3].toFixed(2)}pts</div>:<div>TBD</div>}
+                  </div>
                 </div>
               )
             })}
+            </div>
           </div>
           :null}
           {round16.length>0?
           <div>
             <h3>Round of 16</h3>
+            <div className='roundDiv'>
             {round16.map((heat, i)=>{
               return (
-                <div key={i+'round16'}>
-                  <p>{openEvent.surfers[heat[0]].name}: {heat[2]}pts vs {openEvent.surfers[heat[1]].name}: {heat[3]}pts</p>
+                <div key={i+'round16'} className='heatDiv'>
+                  <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                  <div className='surferInHeatDiv'>
+                    <img style={{width:'60px', height:'60px', border:'1px solid black', borderRadius:'50%'}} src={openEvent.surfers[heat[0]].image} alt={openEvent.surfers[heat[0]].name} />
+                    <div style={{fontSize:'25px'}}>{openEvent.surfers[heat[0]].name}</div>
+                    <div style={{color:'gray'}}>{openEvent.surfers[heat[0]].rank===0?'WC':openEvent.surfers[heat[0]].rank}</div>
+                    <img style={{width:'30px', height:'20px', border:'1px solid black'}} src={openEvent.surfers[heat[0]].flag} alt={openEvent.surfers[heat[0]].country} />
+                  </div>
+                  {typeof heat[2]==='number'?<div style={{fontSize:'25px', fontWeight:'bold', paddingRight:'10px'}}> {heat[2].toFixed(2)}pts</div>:<div>TBD</div>}
+                  </div>
+                  <div style={{textAlign:'center', fontWeight:'bold'}}>---VS---</div>
+                  <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                  <div className='surferInHeatDiv'>
+                    <img style={{width:'60px', height:'60px', border:'1px solid black', borderRadius:'50%'}} src={openEvent.surfers[heat[1]].image} alt={openEvent.surfers[heat[1]].name} />
+                    <div style={{fontSize:'25px'}}>{openEvent.surfers[heat[1]].name}</div>
+                    <div style={{color:'gray'}}>{openEvent.surfers[heat[1]].rank===0?'WC':openEvent.surfers[heat[1]].rank}</div>
+                    <img style={{width:'30px', height:'20px', border:'1px solid black'}} src={openEvent.surfers[heat[1]].flag} alt={openEvent.surfers[heat[1]].country} />
+                  </div>
+                  {typeof heat[3]==='number'?<div style={{fontSize:'25px', fontWeight:'bold', paddingRight:'10px'}}> {heat[3].toFixed(2)}pts</div>:<div>TBD</div>}
+                  </div>
                 </div>
               )
             })}
+            </div>
             </div>
             :null}
           {quarters.length>0?
           <div>
             <h3>Quarter Finals</h3>
+            <div className='roundDiv'>
             {quarters.map((heat, i)=>{
               return (
-                <div key={i+'quarters'}>
-                  <p>{openEvent.surfers[heat[0]].name}: {heat[2]}pts vs {openEvent.surfers[heat[1]].name}: {heat[3]}pts</p>
+                <div key={i+'quarters'} className='heatDiv'>
+                 <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                  <div className='surferInHeatDiv'>
+                    <img style={{width:'60px', height:'60px', border:'1px solid black', borderRadius:'50%'}} src={openEvent.surfers[heat[0]].image} alt={openEvent.surfers[heat[0]].name} />
+                    <div style={{fontSize:'25px'}}>{openEvent.surfers[heat[0]].name}</div>
+                    <div style={{color:'gray'}}>{openEvent.surfers[heat[0]].rank===0?'WC':openEvent.surfers[heat[0]].rank}</div>
+                    <img style={{width:'30px', height:'20px', border:'1px solid black'}} src={openEvent.surfers[heat[0]].flag} alt={openEvent.surfers[heat[0]].country} />
+                  </div>
+                  {typeof heat[2]==='number'?<div style={{fontSize:'25px', fontWeight:'bold', paddingRight:'10px'}}> {heat[2].toFixed(2)}pts</div>:<div>TBD</div>}
+                  </div>
+                  <div style={{textAlign:'center', fontWeight:'bold'}}>---VS---</div>
+                  <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                  <div className='surferInHeatDiv'>
+                    <img style={{width:'60px', height:'60px', border:'1px solid black', borderRadius:'50%'}} src={openEvent.surfers[heat[1]].image} alt={openEvent.surfers[heat[1]].name} />
+                    <div style={{fontSize:'25px'}}>{openEvent.surfers[heat[1]].name}</div>
+                    <div style={{color:'gray'}}>{openEvent.surfers[heat[1]].rank===0?'WC':openEvent.surfers[heat[1]].rank}</div>
+                    <img style={{width:'30px', height:'20px', border:'1px solid black'}} src={openEvent.surfers[heat[1]].flag} alt={openEvent.surfers[heat[1]].country} />
+                  </div>
+                  {typeof heat[3]==='number'?<div style={{fontSize:'25px', fontWeight:'bold', paddingRight:'10px'}}> {heat[3].toFixed(2)}pts</div>:<div>TBD</div>}
+                  </div>
                 </div>
               )
             })}
+            </div>
             </div>
             :null}
           {semis.length>0?
           <div>
             <h3>Semi Finals</h3>
+            <div className='roundDiv'>
             {semis.map((heat, i)=>{
               return (
-                <div key={i+'semis'}>
-                  <p>{openEvent.surfers[heat[0]].name}: {heat[2]}pts vs {openEvent.surfers[heat[1]].name}: {heat[3]}pts</p>
+                <div key={i+'semis'} className='heatDiv'>
+                <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                  <div className='surferInHeatDiv'>
+                    <img style={{width:'60px', height:'60px', border:'1px solid black', borderRadius:'50%'}} src={openEvent.surfers[heat[0]].image} alt={openEvent.surfers[heat[0]].name} />
+                    <div style={{fontSize:'25px'}}>{openEvent.surfers[heat[0]].name}</div>
+                    <div style={{color:'gray'}}>{openEvent.surfers[heat[0]].rank===0?'WC':openEvent.surfers[heat[0]].rank}</div>
+                    <img style={{width:'30px', height:'20px', border:'1px solid black'}} src={openEvent.surfers[heat[0]].flag} alt={openEvent.surfers[heat[0]].country} />
+                  </div>
+                  {typeof heat[2]==='number'?<div style={{fontSize:'25px', fontWeight:'bold', paddingRight:'10px'}}> {heat[2].toFixed(2)}pts</div>:<div>TBD</div>}
+                  </div>
+                  <div style={{textAlign:'center', fontWeight:'bold'}}>---VS---</div>
+                  <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                  <div className='surferInHeatDiv'>
+                    <img style={{width:'60px', height:'60px', border:'1px solid black', borderRadius:'50%'}} src={openEvent.surfers[heat[1]].image} alt={openEvent.surfers[heat[1]].name} />
+                    <div style={{fontSize:'25px'}}>{openEvent.surfers[heat[1]].name}</div>
+                    <div style={{color:'gray'}}>{openEvent.surfers[heat[1]].rank===0?'WC':openEvent.surfers[heat[1]].rank}</div>
+                    <img style={{width:'30px', height:'20px', border:'1px solid black'}} src={openEvent.surfers[heat[1]].flag} alt={openEvent.surfers[heat[1]].country} />
+                  </div>
+                  {typeof heat[3]==='number'?<div style={{fontSize:'25px', fontWeight:'bold', paddingRight:'10px'}}> {heat[3].toFixed(2)}pts</div>:<div>TBD</div>}
+                  </div>
                 </div>
               )
             })}
+            </div>
             </div>
             :null}
           {finals.length>0?
           <div>
             <h3>Finals</h3>
+            <div className='roundDiv'>
             {finals.map((heat, i)=>{
               return (
-                <div key={i+'finals'}>
-                  <p>{openEvent.surfers[heat[0]].name}: {heat[2]}pts vs {openEvent.surfers[heat[1]].name}: {heat[3]}pts</p>
+                <div key={i+'finals'} className='heatDiv'>
+                  <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                  <div className='surferInHeatDiv'>
+                    <img style={{width:'60px', height:'60px', border:'1px solid black', borderRadius:'50%'}} src={openEvent.surfers[heat[0]].image} alt={openEvent.surfers[heat[0]].name} />
+                    <div style={{fontSize:'25px'}}>{openEvent.surfers[heat[0]].name}</div>
+                    <div style={{color:'gray'}}>{openEvent.surfers[heat[0]].rank===0?'WC':openEvent.surfers[heat[0]].rank}</div>
+                    <img style={{width:'30px', height:'20px', border:'1px solid black'}} src={openEvent.surfers[heat[0]].flag} alt={openEvent.surfers[heat[0]].country} />
+                  </div>
+                  {typeof heat[2]==='number'?<div style={{fontSize:'25px', fontWeight:'bold', paddingRight:'10px'}}> {heat[2].toFixed(2)}pts</div>:<div>TBD</div>}
+                  </div>
+                  <div style={{textAlign:'center', fontWeight:'bold'}}>---VS---</div>
+                  <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                  <div className='surferInHeatDiv'>
+                    <img style={{width:'60px', height:'60px', border:'1px solid black', borderRadius:'50%'}} src={openEvent.surfers[heat[1]].image} alt={openEvent.surfers[heat[1]].name} />
+                    <div style={{fontSize:'25px'}}>{openEvent.surfers[heat[1]].name}</div>
+                    <div style={{color:'gray'}}>{openEvent.surfers[heat[1]].rank===0?'WC':openEvent.surfers[heat[1]].rank}</div>
+                    <img style={{width:'30px', height:'20px', border:'1px solid black'}} src={openEvent.surfers[heat[1]].flag} alt={openEvent.surfers[heat[1]].country} />
+                  </div>
+                  {typeof heat[3]==='number'?<div style={{fontSize:'25px', fontWeight:'bold', paddingRight:'10px'}}> {heat[3].toFixed(2)}pts</div>:<div>TBD</div>}
+                  </div>
                 </div>
               )
             })}
+            </div>
             </div>
             :null}
           {openEvent.surfers[winner]?
