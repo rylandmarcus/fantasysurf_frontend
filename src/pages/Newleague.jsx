@@ -6,7 +6,8 @@ const Newleague = () => {
         e.preventDefault()
         const name = e.target.name.value
         const password = e.target.password.value
-        axios.post(process.env.REACT_APP_BACKEND_URL+'/leagues/new', {name:name, password:password})
+        const teamName = e.target.teamName.value
+        axios.post(process.env.REACT_APP_BACKEND_URL+'/leagues/new', {name:name, password:password, teamName:teamName})
         .then((res)=>{window.location.href = '/leagues'})
         e.target.name.value = ''
         e.target.password.value = ''
@@ -17,6 +18,7 @@ const Newleague = () => {
         <form onSubmit={createLeague}>
             <input type="text" name="name" placeholder='League Name' required/>
             <input type="text" name="password" placeholder='League Password' required/>
+            <input type="text" name='teamName' placeholder="My Team's Name" required/>
             {/* <input type="" name="leagueType" placeholder='League Type' required/> */}
             {/* <input type="" name="event" placeholder='which event' required/> */}
             {/* <input type="" name="leagueLength" placeholder='one event or full year/rest of year' required/> */}

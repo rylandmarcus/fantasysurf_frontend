@@ -18,3 +18,6 @@ const Navbar = ({setStatus}) => {
 }
 
 export default Navbar
+
+//LETSS SWTITCHHH
+//swithc leagues to teams, and then when you view team, it'll say click team or click league, put both in same spot
