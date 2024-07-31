@@ -8,7 +8,7 @@ const Leagues = () => {
     <div>
       <h1>Leagues</h1>
       <Link to='/newleague'><button>Create New League</button></Link>
-      <Link><button>Join League</button></Link>
+      <Link to='/joinleague'><button>Join League</button></Link>
       <h2>Your Teams:</h2>
       {leagues.length===0?<div>Join or Create a league to make a team!</div>:
       <div>
