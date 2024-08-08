@@ -20,7 +20,7 @@ const Leagues = () => {
               {league.teams.map((team, index)=>{
                 return(
                   <div key={index+team._id}>
-                    <h5>{team.name}</h5>
+                    <h5>{team.name}{index===league.currentUser?'(My Team!)':null}</h5>
                   </div>
                 )
               })}
