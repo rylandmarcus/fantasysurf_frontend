@@ -15,12 +15,12 @@ const Leagues = () => {
         {leagues.map((league, index)=>{
           return(
             <div key={index+league._id}>
-              <h3>{league.name}</h3>
+              <Link to={`/leagues/${league._id}`}><h3>{league.name}</h3></Link>
               <h4>Teams:</h4>
               {league.teams.map((team, index)=>{
                 return(
                   <div key={index+team._id}>
-                    <h5>{team.name}{index===league.currentUser?'(My Team!)':null}</h5>
+                    <Link>{team.name}{index===league.currentUser?'(My Team!)':null}</Link>
                   </div>
                 )
               })}

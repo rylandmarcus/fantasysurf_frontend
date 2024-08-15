@@ -1,6 +1,6 @@
 import {createBrowserRouter, createRoutesFromElements, Route} from "react-router-dom"
 import App from "./App"
-import { adminEventLoad, adminEventsLoad, adminLoad, adminSurferLoad, adminSurfersLoad, ctEventsLoad, ctRankingsLoad, joinLeagueLoad, myLeaguesLoad, userLoad } from "./loader"
+import { adminEventLoad, adminEventsLoad, adminLoad, adminSurferLoad, adminSurfersLoad, ctEventsLoad, ctRankingsLoad, joinLeagueLoad, leagueLoad, myLeaguesLoad, userLoad } from "./loader"
 import Admin from "./pages/Admin"
 import Surfers from "./adminpages/Surfers"
 import Events from "./adminpages/Events"
@@ -15,12 +15,14 @@ import Pastleagues from "./pages/Pastleagues"
 import Settings from "./pages/Settings"
 import Newleague from "./pages/Newleague"
 import Joinleague from "./pages/Joinleague"
+import League from "./pages/League"
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<App></App>}>
             <Route path="" element={<Home></Home>}></Route>
             <Route path="/leagues" element={<Leagues></Leagues>} loader={myLeaguesLoad}></Route>
+            <Route path="/leagues/:id" element={<League></League>} loader={leagueLoad}></Route>
             <Route path="/newleague" element={<Newleague></Newleague>}></Route>
             <Route path="/joinleague" element={<Joinleague></Joinleague>} loader={joinLeagueLoad}></Route>
             <Route path="/ctevents" element={<Ctevents></Ctevents>} loader={ctEventsLoad}></Route>
