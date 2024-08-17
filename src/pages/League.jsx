@@ -1,11 +1,12 @@
 import React from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { Link, useLoaderData } from 'react-router-dom'
 import Joinleaguebutton from '../components/Joinleaguebutton'
 import axios from 'axios'
 
 const League = () => {
     const league = useLoaderData()
     const leaveLeague = (e)=>{
+        //once league is active, no more leaving, also make it a second are you sure you want to leave
         e.preventDefault()
         axios.put(process.env.REACT_APP_BACKEND_URL+'/leagues/leaveleague/'+league._id).then(
             res=>{
@@ -22,7 +23,7 @@ const League = () => {
         {league.teams.map((team, index)=>{
             return(
                 <div key={index+team._id}>
-                    <h3>{team.name}{index==league.currentUser?"(My team)":null}</h3>
+                    <Link to={`/leagues/${league._id}/team/${team._id}`}><h3>{team.name}{index==league.currentUser?"(My team)":null}</h3></Link>
                     <h4>Surfers:</h4>
                     {team.surfers.map((surfer, index)=>{
                         return(
