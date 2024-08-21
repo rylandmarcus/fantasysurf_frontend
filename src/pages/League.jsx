@@ -18,7 +18,11 @@ const League = () => {
   return (
     <div>
         <h1>{league.name}</h1>
-        <h2>{league.teams.length}/{league.leagueSize} {league.teams.length==league.leagueSize?"league full": league.currentUser==-1?<Joinleaguebutton league={league}></Joinleaguebutton>:null} {league.currentUser>=0?<button onClick={leaveLeague}>Leave League</button>:null}</h2>
+        <h2>{league.teams.length}/{league.leagueSize} {
+            league.teams.length==league.leagueSize?"league full": 
+            league.currentUser==-1?<Joinleaguebutton league={league}></Joinleaguebutton>:
+            null} {league.currentUser>=0?<button onClick={leaveLeague}>Leave League</button>:null}</h2>
+        {league.currentUser>=0&&league.status==='full'?<Link><button>Join Draft</button></Link>:null}
         <h2>Teams:</h2>
         {league.teams.map((team, index)=>{
             return(
