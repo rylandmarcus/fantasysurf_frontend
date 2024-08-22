@@ -22,7 +22,7 @@ const League = () => {
             league.teams.length==league.leagueSize?"league full": 
             league.currentUser==-1?<Joinleaguebutton league={league}></Joinleaguebutton>:
             null} {league.currentUser>=0?<button onClick={leaveLeague}>Leave League</button>:null}</h2>
-        {league.currentUser>=0&&league.status==='full'?<Link><button>Join Draft</button></Link>:null}
+        {league.currentUser>=0&&league.status==='full'?<Link to={`/leagues/${league._id}/draftroom`}><button>Join Draft</button></Link>:null}
         <h2>Teams:</h2>
         {league.teams.map((team, index)=>{
             return(

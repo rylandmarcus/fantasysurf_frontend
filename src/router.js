@@ -17,6 +17,7 @@ import Newleague from "./pages/Newleague"
 import Joinleague from "./pages/Joinleague"
 import League from "./pages/League"
 import Team from "./pages/Team"
+import Draftroom from "./pages/Draftroom"
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
             <Route path="/leagues" element={<Leagues></Leagues>} loader={myLeaguesLoad}></Route>
             <Route path="/leagues/:id" element={<League></League>} loader={leagueLoad}></Route>
             <Route path="/leagues/:id/team/:teamid" element={<Team></Team>} loader={teamLoad}></Route>
+            <Route path="/leagues/:id/draftroom" element={<Draftroom></Draftroom>}></Route>
             <Route path="/newleague" element={<Newleague></Newleague>}></Route>
             <Route path="/joinleague" element={<Joinleague></Joinleague>} loader={joinLeagueLoad}></Route>
             <Route path="/ctevents" element={<Ctevents></Ctevents>} loader={ctEventsLoad}></Route>
