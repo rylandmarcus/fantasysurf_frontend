@@ -216,3 +216,24 @@ export const teamLoad = ({params})=>{
         return {}
     })
 }
+
+export const draftroomLoad = ({params})=>{
+    return axios.get(process.env.REACT_APP_BACKEND_URL+'/leagues/'+params.id+'/draft').then(res=>{
+        if (res.Status==='Not in League'){
+            window.location.href = '/leagues/'+params.id
+            return {}
+        } else if (res.data){
+            console.log(res.data)
+            console.log('from loader')
+            const data = res.data
+            return data
+        } else {
+            window.location.href = '/'
+            return {}
+        }
+    }).catch(err=>{
+        console.log(err)
+        window.location.href = '/'
+        return {}
+    })
+}
