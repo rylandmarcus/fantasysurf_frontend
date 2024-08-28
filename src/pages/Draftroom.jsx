@@ -8,6 +8,15 @@ const Draftroom = () => {
     const socket = io.connect(process.env.REACT_APP_BACKEND_URL)
     const [announcementBar, setAnnouncementBar] = useState('')
     useEffect(()=>{
+        let updatedLeague = JSON.parse(JSON.stringify(leagueCopy))
+        updatedLeague.teams.forEach(t=>{
+            t.surfers.forEach(s=>{
+                updatedLeague.event.surfers[s] = {}
+            })
+        })
+        setLeagueCopy(updatedLeague)
+    },[])
+    useEffect(()=>{
         socket.on('connect', ()=>{
             console.log('connected')
         })
@@ -80,11 +89,13 @@ const Draftroom = () => {
         })}
         <h3>Surfers Remaining for Event: {leagueCopy.event.name}</h3>
         {leagueCopy.event.surfers.map((surfer, i)=>{
-            return <div key={surfer._id+'in event'+i} style={{display:'flex',flexDirection:'row'}}> 
+            return surfer._id?
+                <div key={surfer._id+'in event'+i} style={{display:'flex',flexDirection:'row'}}> 
                 <div>{i+1}</div>
                 <div>{surfer.name}</div>
                 <button onClick={draftSurfer}>draft</button> 
                 </div>
+                :null
         })}
     </div>
   )
