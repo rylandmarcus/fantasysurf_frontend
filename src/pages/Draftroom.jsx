@@ -7,6 +7,7 @@ const Draftroom = () => {
     const [leagueCopy, setLeagueCopy] = useState(league)
     const socket = io.connect(process.env.REACT_APP_BACKEND_URL)
     const [announcementBar, setAnnouncementBar] = useState('')
+    const [timer, setTimer] = useState(10)
     useEffect(()=>{
         let updatedLeague = JSON.parse(JSON.stringify(leagueCopy))
         updatedLeague.teams.forEach(t=>{
@@ -14,6 +15,7 @@ const Draftroom = () => {
                 updatedLeague.event.surfers[s] = {}
             })
         })
+        //^ more efficient way to do this? maybe iwth Reduce?
         setLeagueCopy(updatedLeague)
     },[])
     useEffect(()=>{
@@ -46,6 +48,11 @@ const Draftroom = () => {
                 }
             }
         })
+        socket.on('receiveTimer', (time)=>{
+            //YOU ARE ALSO HERE
+            console.log('timer: '+time)
+            setTimer(time)
+        })
         return ()=>{
             //leave room
         }
@@ -73,6 +80,7 @@ const Draftroom = () => {
         <h1>Draftroom</h1>
         <h2>Draft for {leagueCopy.name}</h2>
         <h2>{announcementBar}</h2>
+        <h2>Timer: {timer}</h2>
         <button onClick={sayHi}>Say Hi</button>
         <button onClick={hiOthers}>Say Hi To Others</button>
         <h3>Teams</h3>
