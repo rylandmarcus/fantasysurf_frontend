@@ -31,7 +31,7 @@ const League = () => {
                     <h4>Surfers:</h4>
                     {team.surfers.map((surfer, index)=>{
                         return(
-                            <div key={index+surfer._id}>
+                            <div key={index+surfer._id+team._id}>
                                 <h5>{surfer.name}</h5>
                                 <h6>{surfer.country}</h6>
                                 <h6>{surfer.rank}</h6>
